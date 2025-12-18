@@ -1,48 +1,44 @@
-﻿Console.Write("Enter a comman (add, list, help, exit):");
-string command = Console.ReadLine().ToLower().Trim();
-
-if (command == "add")
+﻿
+public enum Priority
 {
-    Console.WriteLine("--- Adding a new task ---");
-}
-else if (command == "list")
-{
-    Console.WriteLine("--- Listing all Tasks ---");
-}
-else if (command == "help")
-{
-    Console.WriteLine("Help");
-}
-else if (command == "exit")
-{
-    Console.WriteLine("Exiting the Task Manager. Goodbye!");
-}
-else
-{
-    Console.WriteLine($"Unknow command: '{command}'.");
+    Low,
+    Medium,
+    High,
+    Critical
 }
 
-Console.Write("Enter a task priority (1: High, 2: Medium, 3: Low): ");
-string priorityInput = Console.ReadLine();
-int priority = int.Parse(priorityInput);
+class Program
+{
+    static void Main(string[] args)
+    {
 
-if (priority == 1)
-{
-    Console.WriteLine($"Priority task {1}: High");
-}
-else if (priority == 2)
-{
-    Console.WriteLine($"Priority task {2}: Medium");
-}
-else if (priority == 3)
-{
-    Console.WriteLine($"Priority task {3}: Low");
-}
-else
-{
-    Console.WriteLine($"Priority {priorityInput} not found, insert a valid input");
-}
+        Console.Write("Enter a comman (add, list, help, exit): ");
+        string command = Console.ReadLine().ToLower().Trim();
 
-bool isPremiumUser = true;
-string accountTypeMessage = isPremiumUser ? "Premium Account" : "Standart Account";
-Console.WriteLine(accountTypeMessage);
+        string addTaskMessage = command switch
+        {
+            "add" => "Adding a new task...",
+            "list" => "Listing all tasks...",
+            "exit" => "Exiting Task Manager.",
+            _ => "Unknow command. Type 'help' for options."
+        };
+
+        Console.WriteLine(addTaskMessage);
+
+        Priority priority = Priority.Low;
+        string priorityMessage = priority switch
+        {
+            Priority.Low => "Can be done anytime.",
+            Priority.Medium => "Should be done soon.",
+            Priority.High => "Requires immediate attention",
+            Priority.Critical => "Urgent, requires immediate action.",
+            _ => "Unknown priority value"
+        };
+
+        Console.WriteLine(priorityMessage);
+
+        bool isPremiumUser = true;
+        string accountTypeMessage = isPremiumUser ? "Premium Account" : "Standart Account";
+        Console.WriteLine(accountTypeMessage);
+    }
+}
