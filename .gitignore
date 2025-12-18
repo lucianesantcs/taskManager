@@ -3,6 +3,14 @@
 ##
 ## Get latest from `dotnet new gitignore`
 
+.github
+.vs
+.vscode
+
+# Ignore bin and obj folders
+**/bin/
+**/obj/
+
 # dotenv files
 .env
 
@@ -254,9 +262,6 @@ orleans.codegen.cs
 # (https://github.com/github/gitignore/pull/1529#issuecomment-104372622)
 #bower_components/
 
-
-.github
-
 # RIA/Silverlight projects
 Generated_Code/
 
@@ -380,7 +385,11 @@ healthchecksdb
 MigrationBackup/
 
 # Ionide (cross platform F# VS Code tools) working folder
-.ionide/
+.ionide/# Ignore bin and obj folders
+**/bin/
+**/obj/# Ignore bin and obj folders
+**/bin/
+**/obj/
 
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
