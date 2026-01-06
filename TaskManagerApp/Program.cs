@@ -61,5 +61,37 @@ class Program
             Console.WriteLine(mensagemCalculadora);
 
         } while(com != 3);
+
+        int[] numbers = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };
+
+        foreach(int num in numbers)
+        {
+            Console.WriteLine(num);
+        };
+
+        string sentence = "Hello World CSharp";
+        int contadorVogais = 0;
+        string vogais = "aeiou";
+        foreach(char c in sentence.ToLower())
+        {
+            if(vogais.Contains(c))
+            {
+                contadorVogais++;
+            }
+        };
+        Console.WriteLine(contadorVogais);
+
+        string[] tasks = { "Learn C# basics", "Complete urgent report", "Practice foreach loop", "Review conditional statements" };
+        foreach(string c in tasks)
+        {
+            if(c.ToLower().Contains("urgent"))
+            {
+                Console.WriteLine($"*{c}*");
+            } else
+            {
+                Console.WriteLine(c);
+            }
+        }
+
     }
 }
