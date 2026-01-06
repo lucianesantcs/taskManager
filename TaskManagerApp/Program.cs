@@ -1,97 +1,92 @@
-﻿
-public enum Priority
-{
-    Low,
-    Medium,
-    High,
-    Critical
-}
+﻿using System.Collections.Generic;
 
-class Program
+public class TaskManager
 {
-    static void Main(string[] args)
+    private List<string> tasks = new List<string>();
+
+    public void DisplayMenu()
     {
+        Console.WriteLine("\n--- Task Manager Menu ---");
+        Console.WriteLine("1. Add a new task");
+        Console.WriteLine("2. List all tasks");
+        Console.WriteLine("3. Exit");
+        Console.WriteLine("4. Clear all Tasks");
+        Console.Write("Enter your choice: ");
+    }
 
-        Console.Write("Enter a comman (add, list, help, exit): ");
-        string command = Console.ReadLine().ToLower().Trim();
+    public void AddTask()
+    {
+        Console.Write("Enter the task description: ");
+        string? taskDescription = Console.ReadLine();
 
-        string addTaskMessage = command switch
+        if (!string.IsNullOrWhiteSpace(taskDescription))
         {
-            "add" => "Adding a new task...",
-            "list" => "Listing all tasks...",
-            "exit" => "Exiting Task Manager.",
-            _ => "Unknow command. Type 'help' for options."
-        };
-
-        Console.WriteLine(addTaskMessage);
-
-        Priority priority = Priority.Low;
-        string priorityMessage = priority switch
+            tasks.Add(taskDescription);
+            Console.WriteLine("Task added successfully!");
+        }
+        else
         {
-            Priority.Low => "Can be done anytime.",
-            Priority.Medium => "Should be done soon.",
-            Priority.High => "Requires immediate attention",
-            Priority.Critical => "Urgent, requires immediate action.",
-            _ => "Unknown priority value"
-        };
+            Console.WriteLine("Task description cannot be empty.");
+        }
+    }
 
-        Console.WriteLine(priorityMessage);
-
-        bool isPremiumUser = true;
-        string accountTypeMessage = isPremiumUser ? "Premium Account" : "Standart Account";
-        Console.WriteLine(accountTypeMessage);
-
-        int com;
-        do
+    public void ListTasks()
+    {
+        if (tasks.Count == 0)
         {
-            Console.WriteLine("1. Add");
-            Console.WriteLine("2. Subtract");
-            Console.WriteLine("3. Exit");
-            Console.WriteLine("Choose: ");
-            com = int.Parse(Console.ReadLine());
-
-            string mensagemCalculadora = com switch
-            {
-                1 => "Performing addition...",
-                2 => "Performing subtraction...",
-                3 => "Exiting...",
-                _ => "Unknown"
-            };
-
-            Console.WriteLine(mensagemCalculadora);
-
-        } while(com != 3);
-
-        int[] numbers = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };
-
-        foreach(int num in numbers)
-        {
-            Console.WriteLine(num);
-        };
-
-        string sentence = "Hello World CSharp";
-        int contadorVogais = 0;
-        string vogais = "aeiou";
-        foreach(char c in sentence.ToLower())
-        {
-            if(vogais.Contains(c))
-            {
-                contadorVogais++;
-            }
-        };
-        Console.WriteLine(contadorVogais);
-
-        string[] tasks = { "Learn C# basics", "Complete urgent report", "Practice foreach loop", "Review conditional statements" };
-        foreach(string c in tasks)
-        {
-            if(c.ToLower().Contains("urgent"))
-            {
-                Console.WriteLine($"*{c}*");
-            } else
-            {
-                Console.WriteLine(c);
-            }
+            Console.WriteLine("\nNo tasks to display.");
+            return;
         }
 
+        Console.WriteLine("\n--- Your Tasks ---");
+        for (int i = 0; i < tasks.Count; i++)
+        {
+            Console.WriteLine($"{i + 1}. {tasks[i]}");
+        }
+    }
+
+    public void ClearAllTasks()
+    {
+        // REMOVER TASKS
+        Console.WriteLine("Tasks removed successfully!");
+    }
+
+    public void Run()
+    {
+        bool running = true;
+        while (running)
+        {
+            DisplayMenu();
+            string? choice = Console.ReadLine();
+
+            switch (choice)
+            {
+                case "1":
+                    AddTask();
+                    break;
+                case "2":
+                    ListTasks();
+                    break;
+                case "3":
+                    Console.WriteLine("Exiting Task Manager. Goodbye!");
+                    running = false;
+                    break;
+                case "4":
+                    ClearAllTasks();
+                    break;
+                default:
+                    Console.WriteLine("Invalid choice. Please try again");
+                    break;
+            }
+        }
+    }
+}
+
+public class Program
+{
+    public static void Main(string[] args)
+    {
+        TaskManager manager = new TaskManager();
+        manager.Run();
     }
 }
