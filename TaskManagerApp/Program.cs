@@ -40,5 +40,26 @@ class Program
         bool isPremiumUser = true;
         string accountTypeMessage = isPremiumUser ? "Premium Account" : "Standart Account";
         Console.WriteLine(accountTypeMessage);
+
+        int com;
+        do
+        {
+            Console.WriteLine("1. Add");
+            Console.WriteLine("2. Subtract");
+            Console.WriteLine("3. Exit");
+            Console.WriteLine("Choose: ");
+            com = int.Parse(Console.ReadLine());
+
+            string mensagemCalculadora = com switch
+            {
+                1 => "Performing addition...",
+                2 => "Performing subtraction...",
+                3 => "Exiting...",
+                _ => "Unknown"
+            };
+
+            Console.WriteLine(mensagemCalculadora);
+
+        } while(com != 3);
     }
 }
