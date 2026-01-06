@@ -47,7 +47,7 @@ public class TaskManager
 
     public void ClearAllTasks()
     {
-        // REMOVER TASKS
+        tasks.Clear();
         Console.WriteLine("Tasks removed successfully!");
     }
 
